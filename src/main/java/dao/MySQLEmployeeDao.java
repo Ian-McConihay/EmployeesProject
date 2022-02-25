@@ -10,10 +10,31 @@ import java.util.List;
 public class MySQLEmployeeDao implements Employees {
 	private Connection connection;
 
+	public MySQLEmployeeDao(Config config) {
+		try {
+			DriverManager.registerDriver(new Driver());
+			connection = DriverManager.getConnection(
+					config.getUrl(),
+					config.getUser(),
+					config.getPassword()
+			);
+		} catch (SQLException e) {
+			throw new RuntimeException("Error connecting to the database!", e);
+		}
+	}
+
 	@Override
 	public List<Employee> all() {
-		return null;
+		PreparedStatement statement = null;
+		try {
+			statement = connection.prepareStatement("SELECT * FROM employees_db.employees");
+			ResultSet resultSet = statement.executeQuery();
+			return createEmployeeFromResults(resultSet);
+		} catch (SQLException e) {
+			throw new RuntimeException("Error retrieving all posts.", e);
+		}
 	}
+
 
 	@Override
 	public Long insert(Employee employee) {
