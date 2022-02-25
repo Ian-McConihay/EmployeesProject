@@ -4,6 +4,7 @@ import com.mysql.cj.jdbc.Driver;
 import model.Employee;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -59,5 +60,31 @@ public class MySQLEmployeeDao implements Employees {
 	@Override
 	public List<Employee> allById(Long id) {
 		return null;
+	}
+
+	private Employee extractEmployee(ResultSet resultSet) {
+		try {
+			return new Employee(
+					resultSet.getLong("id"),
+					resultSet.getString("name"),
+					resultSet.getInt("age"),
+					resultSet.getString("date_joined"),
+
+			);
+		} catch (SQLException e) {
+			throw new RuntimeException("Error extracting post", e);
+		}
+	}
+
+	private List<Employee> createPostFromResults(ResultSet resultSet) {
+		try {
+			List<Employee> posts = new ArrayList<>();
+			while (resultSet.next()) {
+				posts.add(extractEmployee(resultSet));
+			}
+			return posts;
+		} catch(SQLException e){
+			throw new RuntimeException("Error creating post", e);
+		}
 	}
 }
