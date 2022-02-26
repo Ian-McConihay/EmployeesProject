@@ -1,6 +1,7 @@
 package controller;
 
 import dao.DaoFactory;
+import model.Employee;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,4 +15,5 @@ public class IndexServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("all-employees", DaoFactory.getEmployeesDao().all());
 	}
+
 }
