@@ -22,7 +22,8 @@ public class AddEmployeeServlet extends HttpServlet {
 		request.getSession().setAttribute("employee", employee);
 
 
-		Employee newEmployee = new Employee(
+		Employee newEmployee = new Employee();
+		newEmployee = new Employee(
 				newEmployee.getId(),
 				request.getParameter("name"),
 				request.getParameter("age"),

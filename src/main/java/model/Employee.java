@@ -15,6 +15,9 @@ public class Employee {
 		this.dateJoined = dateJoined;
 	}
 
+	public Employee(long id, String name, String age, String dateJoined) {
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -39,7 +42,7 @@ public class Employee {
 		this.age = age;
 	}
 
-	public String getDateJoined() {
+	public String getDateJoined(String date) {
 		return dateJoined;
 	}
 

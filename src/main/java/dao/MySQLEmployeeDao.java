@@ -5,13 +5,14 @@ import com.google.protobuf.Internal;
 import com.mysql.cj.jdbc.Driver;
 import model.Employee;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.sql.Statement;
 
 public class MySQLEmployeeDao implements Employees {
 	private final Connection connection;
-	private final ResultSet resultSet = null;
 
 	public MySQLEmployeeDao(Config config) {
 		try {
@@ -39,15 +40,20 @@ public class MySQLEmployeeDao implements Employees {
 	}
 
 
+
 	@Override
 	public Long insert(Employee employee) {
+		String pattern = "MM-dd-yyyy";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+		String date = simpleDateFormat.format(new Date());
 		try {
 			String insertQuery = "INSERT INTO employees_db.employees(id, name, age, date_joined) VALUES (?, ?, ?, ?)";
 			PreparedStatement statement = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
 			statement.setLong(1, employee.getId());
 			statement.setString(2, employee.getName());
 			statement.setInt(3, employee.getAge());
-			statement.setString(4, employee.getDateJoined());
+			statement.setString(4, employee.getDateJoined(date));
 			statement.executeUpdate();
 			ResultSet resultSet = statement.getGeneratedKeys();
 			resultSet.next();
