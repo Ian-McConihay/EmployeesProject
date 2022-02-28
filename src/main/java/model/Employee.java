@@ -1,31 +1,40 @@
 package model;
 
 import java.io.Serializable;
+import javax.persistence.*;
 
-
+@Entity
+@Table(name = "employee")
 public class Employee implements Serializable {
-	private long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id", nullable = false, unique = true)
+	private Long id;
+	@Column(name = "employeeName", nullable = false )
 	private String name;
+	@Column(name = "age", nullable = false)
 	private int age;
+	@Column(name = "dateJoined", nullable = false)
 	private String dateJoined;
+
 
 	public Employee() {}
 
-	public Employee(long id, String name, int age, String dateJoined) {
+	public Employee(Long id, String name, int age, String dateJoined) {
 		this.id = id;
 		this.name = name;
 		this.age = age;
 		this.dateJoined = dateJoined;
 	}
 
-	public Employee(long id, String name, String age, String dateJoined) {
+	public Employee(Long id, String name, String age, String dateJoined) {
 	}
 
 	public long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
