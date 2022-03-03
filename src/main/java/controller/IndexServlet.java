@@ -14,6 +14,7 @@ import java.io.IOException;
 public class IndexServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("all-employees", DaoFactory.getEmployeesDao().all());
+		request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 	}
 
 }
