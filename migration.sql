@@ -9,3 +9,8 @@ create table employees (
     PRIMARY KEY (id)
 );
 
+INSERT INTO employees (name, age, date_joined)
+VALUES ('Cruzanio', 25, '03-04-99');
+
+
+

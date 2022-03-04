@@ -13,7 +13,7 @@ import java.io.IOException;
 @WebServlet(name = "controllers.IndexServlet", urlPatterns = "/index")
 public class IndexServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("all-employees", DaoFactory.getEmployeesDao().all());
+		request.setAttribute("allEmployees", DaoFactory.getEmployeesDao().all());
 		request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
 	}
 

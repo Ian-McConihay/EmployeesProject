@@ -53,7 +53,7 @@ public class MySQLEmployeeDao implements Employees {
 			statement.setLong(1, employee.getId());
 			statement.setString(2, employee.getName());
 			statement.setInt(3, employee.getAge());
-			statement.setString(4, employee.getDateJoined(date));
+			statement.setString(4, date);
 			statement.executeUpdate();
 			ResultSet resultSet = statement.getGeneratedKeys();
 			resultSet.next();

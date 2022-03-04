@@ -54,6 +54,10 @@ public class Employee implements Serializable {
 		this.age = age;
 	}
 
+	public String getDateJoined() {
+		return dateJoined;
+	}
+
 	public String getDateJoined(String date) {
 		return dateJoined;
 	}
