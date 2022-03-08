@@ -13,7 +13,11 @@
 </head>
 <body>
 <div>
-
+<form action="add-employee" method="post">
+    <input type="text" name="name">
+    <input type="text" name="age">
+    <input type="submit ">
+</form>
 </div>
 </body>
 </html>
