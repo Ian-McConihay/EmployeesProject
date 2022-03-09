@@ -5,11 +5,11 @@
     <title>Employee Index<</title>
 </head>
 <body>
-<p>Hello?</p>
+<%--<p>Hello?</p>--%>
 <div>
-    <c:forEach var="rS" items="${requestScope}">
-        <p>KEY: ${rS.key} ----> VALUE: ${rS.value}</p>
-    </c:forEach>
+<%--    <c:forEach var="rS" items="${requestScope}">--%>
+<%--        <p>KEY: ${rS.key} ----> VALUE: ${rS.value}</p>--%>
+<%--    </c:forEach>--%>
     <c:forEach var="rS" items="${requestScope}">
         <c:if test = "${rS.key == 'allEmployees'}">
             <table style="width:50%; justify-content: center; margin: auto; text-align: center; border: solid black 1px">

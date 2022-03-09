@@ -18,16 +18,21 @@ public class AddEmployeeServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		Employee employee = (Employee) request.getSession().getAttribute("employee");
-		request.getSession().setAttribute("employee", employee);
+//		Employee employee = (Employee) request.getSession().getAttribute("employee");
+//		request.getSession().setAttribute("employee", employee);
 
+
+		// create and save a new Employee
+//		Employee employee = new Employee(name, age);
+//		DaoFactory.getEmployeesDao().insert(employee);
+//		response.sendRedirect("/index");
 
 		Employee newEmployee = new Employee();
 		newEmployee = new Employee(
 				newEmployee.getId(),
 				request.getParameter("name"),
 				request.getParameter("age"),
-				request.getParameter("dateJoined")
+				newEmployee.getDateJoined()
 		);
 		DaoFactory.getEmployeesDao().insert(newEmployee);
 		response.sendRedirect("/index");

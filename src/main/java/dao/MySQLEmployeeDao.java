@@ -8,6 +8,7 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.sql.Statement;
 
@@ -35,7 +36,7 @@ public class MySQLEmployeeDao implements Employees {
 			ResultSet resultSet = statement.executeQuery();
 			return createEmployeeFromResults(resultSet);
 		} catch (SQLException e) {
-			throw new RuntimeException("Error retrieving all posts.", e);
+			throw new RuntimeException("Error retrieving all employee.", e);
 		}
 	}
 
@@ -48,18 +49,17 @@ public class MySQLEmployeeDao implements Employees {
 
 		String date = simpleDateFormat.format(new Date());
 		try {
-			String insertQuery = "INSERT INTO employees_db.employees(id, name, age, date_joined) VALUES (?, ?, ?, ?)";
+			String insertQuery = "INSERT INTO employees_db.employees( name, age, date_joined) VALUES (?, ?, ?, ?)";
 			PreparedStatement statement = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
-			statement.setLong(1, employee.getId());
-			statement.setString(2, employee.getName());
-			statement.setInt(3, employee.getAge());
-			statement.setString(4, date);
+			statement.setString(1, employee.getName());
+			statement.setInt(2, employee.getAge());
+			statement.setString(3, date);
 			statement.executeUpdate();
 			ResultSet resultSet = statement.getGeneratedKeys();
 			resultSet.next();
 			return resultSet.getLong(1);
 		} catch (SQLException e) {
-			throw new RuntimeException("Error creating a new post.", e);
+			throw new RuntimeException("Error creating a new employee.", e);
 		}
 	}
 
@@ -71,7 +71,7 @@ public class MySQLEmployeeDao implements Employees {
 			statement.setLong(1, employee.getId());
 			statement.executeUpdate();
 		} catch (SQLException e) {
-			throw new RuntimeException("Error deleting post", e);
+			throw new RuntimeException("Error deleting employee", e);
 		}
 	}
 
@@ -88,7 +88,7 @@ public class MySQLEmployeeDao implements Employees {
 			}
 			return extractEmployee(resultSet);
 		} catch (SQLException e) {
-			throw new RuntimeException("Error finding post ID", e);
+			throw new RuntimeException("Error finding employee ID", e);
 		}
 	}
 
@@ -102,19 +102,19 @@ public class MySQLEmployeeDao implements Employees {
 
 						);
 			} catch (SQLException e) {
-				throw new RuntimeException("Error extracting post", e);
+				throw new RuntimeException("Error extracting employee", e);
 			}
 		}
 
 		private List<Employee> createEmployeeFromResults (ResultSet resultSet){
 			try {
-				List<Employee> employeeList = new ArrayList<>();
+				List<Employee> employeeList = new LinkedList<>();
 				while (resultSet.next()) {
 					employeeList.add(extractEmployee(resultSet));
 				}
 				return employeeList;
 			} catch (SQLException e) {
-				throw new RuntimeException("Error creating post", e);
+				throw new RuntimeException("Error creating employee", e);
 			}
 		}
 
@@ -133,7 +133,7 @@ public class MySQLEmployeeDao implements Employees {
 			}
 			return employeeList;
 		} catch (SQLException e) {
-			throw new RuntimeException("Error retrieving searched Post", e);
+			throw new RuntimeException("Error retrieving searched employee", e);
 		}
 	}
 
@@ -146,7 +146,7 @@ public class MySQLEmployeeDao implements Employees {
 			ResultSet resultSet = statement.executeQuery();
 			return createEmployeeFromResults(resultSet);
 		} catch (SQLException e) {
-			throw new RuntimeException("Error finding user ID", e);
+			throw new RuntimeException("Error finding employee ID", e);
 		}
 	}
 
